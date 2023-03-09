@@ -18,3 +18,7 @@
   align-items: center;
   border: 2px solid teal;
 }
+.form {
+  display: flex;
+  flex-direction: column;
+}

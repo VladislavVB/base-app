@@ -1,39 +1,43 @@
-import React, { useState } from 'react'
-import { Counter } from './components/Counter';
+import React, { useState } from "react";
+import "./styles/App.css";
 
-import './styles/App.css'
-import { PostItem } from './components/PostItem';
-
+import { PostList } from "./components/PostList";
+import { Form } from "./components/Form";
 
 function App() {
-
-  const [posts] = useState([
+  const [posts, setPosts] = useState([
     {
       id: 1,
-      title: '1 JS',
-      body: 'js top desc 3'
+      title: "1 JS",
+      body: "js top desc 3",
     },
     {
       id: 2,
-      title: '2 JS',
-      body: 'js top desc 3'
+      title: "2 JS",
+      body: "js top desc 3",
     },
     {
       id: 3,
-      title: '3 JS',
-      body: 'js top desc 3'
+      title: "3 JS",
+      body: "js top desc 3",
     },
-  ])
+  ]);
 
+  const removePost = (post) => {
+    setPosts(posts.filter((p) => p.id !== post.id));
+  };
+
+  const createPost = (newPost) => {
+    setPosts([...posts, newPost]);
+  };
 
   return (
     <div className="App">
-      <Counter />
-      <h1 style={{textAlign: 'center'}}>
-        Список постов
-      </h1>
-      {posts.map(post =>
-        <PostItem post={post} key={post.id} />
+      <Form create={createPost} />
+      {posts.length ? (
+        <PostList remove={removePost} posts={posts} title="Список постов" />
+      ) : (
+        <h1 style={{ textAlign: "center" }}>Постов.нет</h1>
       )}
     </div>
   );
